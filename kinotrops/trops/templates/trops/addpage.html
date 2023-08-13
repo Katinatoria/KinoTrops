@@ -1,0 +1,23 @@
+{% extends 'trops/base.html' %}
+
+{% block content %}
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <span class="display-4 fw-normal text-dark">Добавь свой собственный троп :)</span>
+    </div>
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+            <form action="{% url 'add_page' %}" method="post">
+            {% csrf_token %}
+                    {% for f in form %}
+                <div class="col-md-12 px-0 text-right">
+                <p class="lead fw-thin text-dark"><label class="form-label" for="{{ f.id_for_label }}"> {{f.label}}:    </label>{{ f }}</p>
+                </div>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+                <button class="btn btn-outline-secondary" type="submit">Добавить</button>
+            </form>
+
+
+{% endblock %}

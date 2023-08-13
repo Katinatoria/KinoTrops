@@ -1,0 +1,46 @@
+{% extends 'trops/base.html' %}
+{% block content %}
+<div class="search-bar w3layouts-newsletter">
+   <h3 class="sear-head editContent">Поиск фильма</h3>
+		<form role="search" method="get" id="searchform" action="{% url 'see_q' %}" class="d-flex editContent">
+			<input type="search" name="q" placeholder="Поиск" class="form-control" required>
+</form>
+</div>
+
+{% for film in movies %}
+<div class="fmain">
+    <div class="fcols fx-row"><div class="fleft fx-1 fx-row">
+        <div class="fleft-desc fx-1">
+            <h1>{{ film.enName }} </h1>
+             <img itemprop="image" loading="lazy" src="{{ film.photo }}" title="{{ film.enName }}"  width=" 300" height=" 400">
+            <div class="fdesc clearfix" itemprop="description"> {{ film.description }} </div>
+            <div class="flists fx-row">
+                <ul class="flist">
+                <li>
+                    <span>Слоган:</span>
+                    <span> {{ film.slogan }}</span>
+                </li>
+                <li><span>Страна:</span>
+                    <span itemprop="countryOfOrigin">
+                        {% for data in film.birthPlace %}
+                        {{ data }}
+                        {% endfor %}
+                    </span>
+                </li>
+                <li>
+                    <span>Жанр:</span>
+                    <span itemprop="genre">
+                        {% for data in film.genres %}
+                        {{ data.name }}
+                        {% endfor %}
+                    </span>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+
+    {% endblock %}
+</div>

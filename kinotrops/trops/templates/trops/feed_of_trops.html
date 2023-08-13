@@ -1,0 +1,46 @@
+<title>Лента тропов</title>
+
+{% extends 'trops/base.html' %}
+{% load trops_tags %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center"><span class="display-5 fw-normal text-dark">Лента тропов</span></div>
+
+
+<style>
+   ul {
+    list-style-type: none;
+   }
+</style>
+
+    <!-- Sidebar слева -->
+    <div class="container py-3">
+        <td valign="top" class=" mt-2 mt-md-0 text-white rounded bg-black">
+            {% if c.women__count > 0 %}
+		    <a class="selected">Все категории</a>
+            {% else %}
+		    <a href="{% url 'feed_of_trops' %}">Все категории</a>
+            {% endif %}
+
+        {% show_categories cat_selected=cat_selected %}
+        </td>
+    </div>
+
+
+
+{% for el in trops %}
+    <div class="p-2 p-md-5 mb-2 text-white rounded bg-blue">
+        <div class="col-md-12 px-0 text-right">
+            <h1 class="display-6 fw-normal text-dark">{{ el.title }}</h1>
+            <p class="lead fw-thin text-dark">{{ el.content|truncatewords:50 }}</p>
+            <p class="lead fw-thin text-dark">Категория: {{el.cat}}</p>
+            <p class="lead fw-thin text-dark">Опубликовано: {{el.time_update|date:"d-m-Y "}}</p>
+        </div>
+      <a class="btn btn-outline-secondary" href="{{ el.get_absolute_url }}">Читать полностью</a>
+    </div>
+{% endfor %}
+
+
+</div>
+{% endblock %}
